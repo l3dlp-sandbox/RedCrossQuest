@@ -659,7 +659,9 @@ La date d'anonymisation est le ".$anonymiseDateString." et ce token sont conserv
       $this->mailingDBService->updateQueteurWithSpotfireAccessToken($mailingInfoEntity->spotfire_access_token, $mailingInfoEntity->id, $uniteLocaleEntity->id);
     }
 
-    $url = $this->appSettings['appUrl'].$this->appSettings['graphPath']."?i=".$mailingInfoEntity->spotfire_access_token."&g=".$this->appSettings['queteurDashboard'];
+    $deploymentType = $this->appSettings['deploymentType'];
+    $graphSubdomain = $deploymentType === 'D' ? 'dev.' : ($deploymentType === 'T' ? 'test.' : '');
+    $url = "https://".$graphSubdomain."graph.redcrossquest.com/?i=".$mailingInfoEntity->spotfire_access_token."&g=".$this->appSettings['queteurDashboard'];
 
     try
     {
@@ -789,7 +791,7 @@ En vous remerciant,
 
     $presidentSignature  = "";
     $presidentSignature2 = "";
-    if($thankYouEmail && $uniteLocaleEntity->president_first_name != null && $uniteLocaleEntity->president_first_name != "")
+    if($thankYouEmail && $uniteLocaleEntity->president_first_name != null)
     {
       $presidentSignature  = ucfirst($uniteLocaleEntity->president_first_name)." ".ucfirst($uniteLocaleEntity->president_last_name).", ";
       $presidentSignature2 = "Président de ";

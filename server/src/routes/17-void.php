@@ -2,7 +2,7 @@
 
 /********************************* Application Settings Exposed to GUI ****************************************/
 
-use RedCrossQuest\routes\routesActions\void\VoidAction;
+use RedCrossQuest\routes\routesActions\voidAction\VoidAction;
 
 
 /**
@@ -32,6 +32,7 @@ use RedCrossQuest\routes\routesActions\void\VoidAction;
  */
 /** @noinspection PhpUndefinedVariableInspection */
 
+/** @var \Slim\App $app */
 $app->get ('/html[/{params:.*}]'      , VoidAction::class);
 $app->get ('/api[/{params:.*}]'       , VoidAction::class);
 $app->get ('/V1[/{params:.*}]'        , VoidAction::class);
